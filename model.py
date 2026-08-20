@@ -70,8 +70,15 @@ def attach_lora_adapters(model, r=8, lora_alpha=16, target_modules=None):
     )
     return peft_model
 
-# Step 7 - count_trainable_parameters (not yet solved)
-# TODO: implement
+# Step 7 - count_trainable_parameters
+def count_trainable_parameters(model):
+    """Return the number of trainable parameters in `model`."""
+    # TODO: sum p.numel() over model.parameters() where requires_grad is True
+    res = sum([
+        m.numel() for m in model.parameters() 
+        if m.requires_grad  
+    ])
+    return res
 
 # Step 8 - trainable_fraction (not yet solved)
 # TODO: implement
