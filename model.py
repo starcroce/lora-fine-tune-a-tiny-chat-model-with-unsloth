@@ -30,8 +30,17 @@ def count_total_parameters(model):
     res = sum(p.numel() for p in model.parameters())
     return res
 
-# Step 3 - is_model_4bit_quantized (not yet solved)
-# TODO: implement
+# Step 3 - is_model_4bit_quantized
+import torch.nn as nn
+import bitsandbytes
+
+def is_model_4bit_quantized(model):
+    """Return True if any submodule of `model` is a bitsandbytes 4-bit linear layer."""
+    # TODO: walk the model's submodules and check for a bitsandbytes Linear4bit instance
+    for m in model.modules():
+        if isinstance(m, bitsandbytes.nn.Linear4bit):
+            return True
+    return False
 
 # Step 4 - ensure_pad_token (not yet solved)
 # TODO: implement
